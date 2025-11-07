@@ -1,8 +1,11 @@
 from django.shortcuts import render
-from django.views.generic import TemplateView
+from django.views.generic import TemplateView, ListView
+from .models import Product
 
-class ProductView(TemplateView):
+class ProductView(ListView):
+    model = Product
     template_name = 'product/products.html'
+    context_object_name = 'product_list'
 
 
 class ProductDetail(TemplateView):
