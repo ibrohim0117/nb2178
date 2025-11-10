@@ -9,7 +9,7 @@ class Category(admin.ModelAdmin):
 
 class ProductImageInline(admin.StackedInline):
     model = ProductImage
-    extra = 2
+    extra = 1
 
 
 @admin.register(Product)
