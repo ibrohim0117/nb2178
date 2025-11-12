@@ -6,6 +6,7 @@ class ProductView(ListView):
     model = Product
     template_name = 'product/products.html'
     context_object_name = 'product_list'
+    ordering = ['-created_at']
 
 
 class ProductDetail(DetailView):

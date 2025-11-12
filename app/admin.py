@@ -14,7 +14,7 @@ class ProductImageInline(admin.StackedInline):
 
 @admin.register(Product)
 class Product(admin.ModelAdmin):
-    list_display = ['name', 'count', 'is_active', 'price', 'sale', 'category', 'id']
+    list_display = ['name', 'count', 'is_active', 'price', 'sale_price', 'sale', 'category', 'id']
     search_fields = ['name', 'count', 'price', 'is_active']
     inlines = [ProductImageInline]
 

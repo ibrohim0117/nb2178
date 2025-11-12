@@ -1,4 +1,6 @@
 from django.db import models
+from django.utils.timezone import now
+from datetime import timedelta
 from django.core.validators import MaxValueValidator, MinValueValidator
 
 class Category(models.Model):
@@ -25,9 +27,24 @@ class Product(models.Model):
     @property
     def sale_price(self):
         return self.price - (self.price * self.sale / 100)
+    
+    @property
+    def is_stok(self):
+        if self.count > 0:
+            return True
+        return False
+    
+
+    @property
+    def is_new(self):
+        return now() - timedelta(days=3) < self.created_at
 
     def __str__(self):
         return self.name
+    
+    # class Meta:
+    #     ordering = ['-created_at']
+
 
 
 class ProductImage(models.Model):
