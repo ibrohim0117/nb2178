@@ -1,8 +1,8 @@
 from django.contrib import admin
-from .models import Product, Category, ProductImage
+from .models import Product, Category, ProductImage, Users
 
 @admin.register(Category)
-class Category(admin.ModelAdmin):
+class CategoryAdmin(admin.ModelAdmin):
     list_display = ['name', 'id']
     search_fields = ['name', ]
 
@@ -13,7 +13,7 @@ class ProductImageInline(admin.StackedInline):
 
 
 @admin.register(Product)
-class Product(admin.ModelAdmin):
+class ProductAdmin(admin.ModelAdmin):
     list_display = ['name', 'count', 'is_active', 'price', 'sale_price', 'sale', 'category', 'id']
     search_fields = ['name', 'count', 'price', 'is_active']
     inlines = [ProductImageInline]
@@ -22,3 +22,9 @@ class Product(admin.ModelAdmin):
 @admin.register(ProductImage)
 class ProductImage(admin.ModelAdmin):
     list_display = ['product', 'image']
+
+
+@admin.register(Users)
+class UserAdmin(admin.ModelAdmin):
+    list_display = ['username', 'first_name', 'email', 'phone', 'is_active', 'is_staff', 'id']
+    search_fields = ['username', 'email', 'phone']
