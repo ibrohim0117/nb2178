@@ -10,6 +10,7 @@ from django.contrib.auth import login, logout
 
 from .models import Product, Users
 from .forms import UserRegisterForm, UserLoginForm
+from .mixsins import NotLoginRequiredMixin
 
 class ProductView(ListView):
     model = Product
@@ -51,7 +52,7 @@ class SettingsView(LoginRequiredMixin, TemplateView):
 
 
 
-class UserLoginView(FormView):
+class UserLoginView(NotLoginRequiredMixin, FormView):
     form_class = UserLoginForm
     template_name = 'auth/login.html'
     success_url = '/'
@@ -66,14 +67,14 @@ class UserLoginView(FormView):
         return super().form_valid(form)
 
 
-class UserRegisterView(CreateView):
+class UserRegisterView(NotLoginRequiredMixin, CreateView):
     model = Users
     template_name = 'auth/register.html'
     form_class =  UserRegisterForm
     success_url = '/'
 
 
-class UserLogoutView(View):
+class UserLogoutView(LoginRequiredMixin, View):
     def get(self, *args, **kwargs):
         logout(self.request)
         return redirect('/')
